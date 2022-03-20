@@ -1,0 +1,199 @@
+
+
+# def teste(text, indice, limite):
+#     if indice >= limite:
+#         return text
+#     if text[indice] in text:
+#         if text[indice] in ["}", ")", "]"] and len(text) == 1:
+#             return text
+        
+#         if text[indice] == "[": 
+#             exp = r'\[.*\]'
+#         elif  text[indice] == "{":
+#             exp = r'\{.*\}'
+#         else:
+#             exp = r'\(.*\)'
+        
+#         match = re.search(exp, text)
+#         if match:
+#             texto = match.group(0)
+#             limite = len( texto ) - 1
+#             texto = teste(texto, indice + 1, limite)
+#             if texto:
+#                 return texto
+#         else:
+#             return text
+
+# print(
+#      teste(text, indice, limite)
+# )
+
+# for letter in text:
+    
+#     regex = f"[{letter}.*{args[letter]}"
+#     r = re.compile(regex)
+#     matches = r.findall(text)
+#     print(
+#         matches
+#     )
+
+
+
+# args = {
+#     "[": "]",
+#     "{": "}",
+#     "(": ")",
+# }
+# result = []
+# for x in text:
+#     for s in text:
+#         if args[s] == x:
+#             result.append(True)
+#         else:
+#             print(
+#                 args[s]
+#             )
+
+# print(result)
+
+# def teste_2(str):
+#     args = {
+#         "[": "]",
+#         "{": "}",
+#         "(": ")",
+        
+#     }
+#     lista_copia2 = list(str)   
+#     lista_copia = list(str)   
+#     print(
+#         lista_copia
+#     )
+#     for arg in lista_copia:
+#         if arg in args.values():
+#             continue
+#         another_character = args[arg]
+        
+#         position_arg = lista_copia2.index(arg)
+#         try:
+#             position_another_character = lista_copia2.index(another_character)
+#         except Exception as e:
+#             return False
+#             print(e)
+        
+#         if position_arg < position_another_character:
+#             lista_copia2.pop(position_arg)
+#             lista_copia2.pop(position_another_character - 1)
+#             new_str = "".join( lista_copia2 )
+#             return teste_2(new_str)
+#         else:
+#             return teste_2(new_str)
+                
+    # for s in enumerate(lista_teste):
+    #     print(
+    #         s
+    #     )
+    #     letter = s[1]
+    #     position = s[0]
+        #position_letter_oposta = None
+        #lista_teste_teste = list( lista_teste )
+        
+
+        #teste_2(str)
+# print(
+    
+# teste_2(text)
+# )
+    
+    
+    
+    
+
+
+# text =  ")("
+# def teste_2(str):
+#     lista_args = ["(", "{", "["]
+#     args = {
+#         "{": "}",
+#         "(": ")",
+#         "[": "]"
+#     }
+#     lista_teste = list(str)
+#     position = None
+#     letter_oposta = None
+#     for s in enumerate(lista_teste):
+#         letter = s[1]
+#         position = s[0]
+#         try:
+#             letter_oposta = args[letter]
+#         except Exception as e:
+#             raise Exception("Inválido")
+#             print(e)
+#         position_letter_oposta = None
+#         lista_teste_teste = list( lista_teste )
+#         for lista_adiantada in enumerate(lista_teste_teste):
+#             if lista_adiantada[1] == letter_oposta:
+#                 position_letter_oposta = lista_adiantada[0]
+#                 print(position_letter_oposta)
+#                 new_list = list( lista_teste )
+#                 new_list.pop(position)
+#                 new_list.pop(position_letter_oposta)
+#                 str = "".join(new_list)
+                
+#                 teste_2(str)
+#string_text = "(([{()}])))"
+#print(
+#    string_text.count('('), 
+#    string_text.count(')'), 
+#)
+
+
+# for i in characters:
+#     #primeiro caracter a ser verificado
+#     first_character = characters[i][0]
+#     #segundo caracter a ser verificado
+#     second_character = characters[i][1]
+#     #conta quantas vezes o caracter repetiu
+#     occurences_first = text_string.count(first_character)
+#     occurences_second = text_string.count( second_character )
+#     # compara a quantidade de vezes que os caracteres aparecem.
+#     if occurences_first != occurences_second:
+#         # se as quantidades não forem iguais quer  dizer que é invalido.
+#         is_valid = False
+#         break
+
+
+text = "Em primeiro lugar, a forma atual de ensino, em que o aluno é obrigado a sentar-se em intervalos determinados pelos superiores, forma os adultos que levam essa forma de produção para o ofício. Logo, baseado no que foi dito, vale citar o filósofo Pitágoras, que explica que é melhor educar bem as crianças do que ter que reeducá-las como adultos. Assim, os maus hábitos adquiridos na infância podem gerar, nos adultos, muitas complicações, já que dentro da sala de aula, a movimentação dos alunos pelo ambiente é repudiada e muitas vezes com consequências. Como consequência, a doutrinação do modelo educacional não atende aos paradigmas de formação de um adulto atento à saúde ocupacional."
+
+def get_position(text, first_position, last_position, first=False, pontuations=(".","!", "?")):
+	numbers = []
+	for pontuation in pontuations:
+		if first:
+			position = text.find(pontuation) + 1
+		else:
+			position = text[first_position:last_position].find(pontuation) + 1
+		numbers.append(position)
+	return max( numbers )
+    
+cont = 0
+run = True
+length_text = len( text )
+first_position = 0
+cont_position = 0
+last_position = 0
+
+while run:
+	if first_position == 0:
+		first_position = get_position(text, first_position, length_text)
+		print(f"text : /n {text[0: cont_position + first_position]}")
+		#print(f"first_position: {first_position} // cont_position: {cont_position}")
+		cont_position = cont_position + first_position
+	else:
+		last_position = get_position(text, cont_position, length_text)
+		print(f"text : /n {text[cont_position: cont_position + last_position]}")
+		cont_position = cont_position + last_position
+		
+		#print(f"last_position: {last_position} // cont_position: {cont_position}")
+	
+	cont += 1
+	if cont_position == length_text:
+		run = False
